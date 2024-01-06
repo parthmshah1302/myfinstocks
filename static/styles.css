@@ -1,0 +1,67 @@
+/* Resetting default body properties */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+
+/* Styles for the main heading */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+/* Header cell styling */
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* Alternate row background colors */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Hover effect on rows */
+tr:hover {
+    background-color: #e1e1e1;
+}
+
+/* Styling for the total row */
+.total-row {
+    font-weight: bold;
+    text-align: right;
+}
+
+/* Styles for the back link */
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #4285f4;
+    color: #fff;
+    border-radius: 4px;
+}
+
+/* Hover effect on back link */
+.back-link:hover {
+    background-color: #357ae8;
+}
