@@ -1,0 +1,206 @@
+{
+    "name": "Anup Kumar",
+    "stocks": {
+        "3MINDIA.BO": {
+            "quantity": 10
+        },
+        "ABBOTINDIA.BO": {
+            "quantity": 102
+        },
+        "ADANIENT.BO": {
+            "quantity": 306
+        },
+        "CONCORDBIO.BO": {
+            "quantity": 280
+        },
+        "ADANIPORTS.BO": {
+            "quantity": 1815
+        },
+        "BAJAJ_AUTO.BO": {
+            "quantity": 48
+        },
+        "AADHARHFC.BO": {
+            "quantity": 658
+        },
+        "TGIF.BO": {
+            "quantity": 1200
+        },
+        "ASIANPAINT.BO": {
+            "quantity": 50
+        },
+        "AZADENG.BO": {
+            "quantity": 1500
+        },
+        "AIAENG.BO": {
+            "quantity": 500
+        },
+        "DMART.BO": {
+            "quantity": 250
+        },
+        "BALKRISIND.BO": {
+            "quantity": 100
+        },
+        "BHARATBIJ.BO": {
+            "quantity": 80
+        },
+        "BHARTI.BO": {
+            "quantity": 1656
+        },
+        "BOSCHLTD.BO": {
+            "quantity": 20
+        },
+        "BSE.BO": {
+            "quantity": 456
+        },
+        "COLPAL.BO": {
+            "quantity": 140
+        },
+        "CADILAHC.BO": {
+            "quantity": 525
+        },
+        "EXICONTEL.BO": {
+            "quantity": 1500
+        },
+        "GODIGIT.BO": {
+            "quantity": 2310
+        },
+        "HAPPSTMNDS.BO": {
+            "quantity": 5100
+        },
+        "HDFCBANK.BO": {
+            "quantity": 266
+        },
+        "HDFCAMC.BO": {
+            "quantity": 1900
+        },
+        "HDFCLIFE.BO": {
+            "quantity": 1600
+        },
+        "HONEYWELL.BO": {
+            "quantity": 12
+        },
+        "ICICIBANK.BO": {
+            "quantity": 1344
+        },
+        "ICICIGI.BO": {
+            "quantity": 500
+        },
+        "ICICIPRULI.BO": {
+            "quantity": 3200
+        },
+        "ICRA.BO": {
+            "quantity": 60
+        },
+        "JIOFIN.BO": {
+            "quantity": 1050
+        },
+        "IRCTC.BO": {
+            "quantity": 1250
+        },
+        "IDFC.BO": {
+            "quantity": 2600
+        },
+        "IDFCFIRSTB.BO": {
+            "quantity": 2600
+        },
+        "IREDA.BO": {
+            "quantity": 33500
+        },
+        "MANKIND.BO": {
+            "quantity": 600
+        },
+        "JSWINFRA.BO": {
+            "quantity": 3000
+        },
+        "MARUTI.BO": {
+            "quantity": 50
+        },
+        "MRF.BO": {
+            "quantity": 1
+        },
+        "MTAR.BO": {
+            "quantity": 500
+        },
+        "LT.BO": {
+            "quantity": 150
+        },
+        "NAM-INDIA.BO": {
+            "quantity": 7000
+        },
+        "PTC.BO": {
+            "quantity": 3500
+        },
+        "PIDILITIND.BO": {
+            "quantity": 100
+        },
+        "POWFPO.BO": {
+            "quantity": 937
+        },
+        "PGINV.BO": {
+            "quantity": 3300
+        },
+        "RELIANCE.BO": {
+            "quantity": 476
+        },
+        "RRKABEL.BO": {
+            "quantity": 450
+        },
+        "SANOFI.BO": {
+            "quantity": 260
+        },
+        "SIEMENS.BO": {
+            "quantity": 50
+        },
+        "TATACONSUM.BO": {
+            "quantity": 298
+        },
+        "TATASTEEL.BO": {
+            "quantity": 13900
+        },
+        "TATAINVEST.BO": {
+            "quantity": 260
+        },
+        "TATATECH.BO": {
+            "quantity": 980
+        },
+        "INDHOTEL.BO": {
+            "quantity": 50
+        },
+        "TITAN.BO": {
+            "quantity": 150
+        },
+        "TRENT.BO": {
+            "quantity": 150
+        },
+        "TATAMOTORS.BO": {
+            "quantity": 6
+        },
+        "TATAMTRDVR.BO": {
+            "quantity": 420
+        },
+        "TATAPOWER.BO": {
+            "quantity": 225
+        },
+        "TCS.BO": {
+            "quantity": 701
+        },
+        "TECHM.BO": {
+            "quantity": 336
+        },
+        "TVSSCS.BO": {
+            "quantity": 2000
+        },
+        "ZAGGLE.BO": {
+            "quantity": 1260
+        },
+        "YESBANK.BO": {
+            "quantity": 15000
+        },
+        "IDEA.BO": {
+            "quantity": 145971
+        },
+        "ZOMATO.BO": {
+            "quantity": 1250
+        }
+    }
+}
