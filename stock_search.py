@@ -9,13 +9,13 @@ def show():
         return
 
     st.title('Stock search 📈')
+    st.write('Enter the stock tickers to get the stock information and historical data.')
+    st.write('Please add ".BO" at the end of the ticker. Example: ZOMATO.BO.')
+    
 
     # Get the tickers from the user
-    tickers = st.text_input('Enter the stock tickers (comma separated):', 'ZOMATO')
-
-    # Split the tickers and append '.BO' to each ticker
-    tickers = [ticker + '.BO' for ticker in tickers.split(',')]
-
+    tickers = st.text_input('Enter the stock tickers (comma separated):', '^BSESN')
+    tickers = [ticker.strip() for ticker in tickers.split(',')]
     data = {}
     for ticker in tickers:
         stock = yf.Ticker(ticker)
