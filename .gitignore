@@ -1,0 +1,4 @@
+__pycache__ 
+*.pyc
+sample/*.csv
+portfolio.db
