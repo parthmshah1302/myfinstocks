@@ -16,6 +16,9 @@ RUN pip install -r requirements.txt
 # Copy backend code
 COPY backend backend
 
+# Make Python see /app/backend so `import app` works
+ENV PYTHONPATH=/app/backend
+
 # Expose the app port
 EXPOSE 8080
 

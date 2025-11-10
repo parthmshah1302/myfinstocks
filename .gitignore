@@ -4,3 +4,4 @@ sample/*.csv
 portfolio.db
 .env
 venv/
+node_modules/
