@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Text, TIMESTAMP, Numeric, ForeignKey, BigInteger, CheckConstraint
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
-from app.database import Base
+from ..database import Base
 
 class Client(Base):
     __tablename__ = "clients"

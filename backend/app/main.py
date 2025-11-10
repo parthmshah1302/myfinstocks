@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.config import settings
-from app.routes import clients, holdings, prices, portfolio
+from .config import settings
+from .routes import clients, holdings, prices, portfolio
 
 app = FastAPI(
     title=settings.APP_NAME,

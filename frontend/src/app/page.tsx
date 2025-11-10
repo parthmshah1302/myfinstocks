@@ -3,15 +3,16 @@ import { useEffect, useState } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 import { api } from "@/lib/api";
 
-type PricePoint = { date: string; close: number };
 type Summary = {
   symbol: string;
-  live_price: string;
-  yesterday_price: string;
-  price_30d_ago: string;
-  price_1y_ago: string;
+  live_price: string | number;
+  yesterday_price: string | number;
+  price_30d_ago: string | number;
+  price_1y_ago: string | number;
   exchange: string;
 };
+
+type PricePoint = { label: string; value: number };
 
 export default function Page() {
   const [summary, setSummary] = useState<Summary | null>(null);
@@ -21,10 +22,24 @@ export default function Page() {
   useEffect(() => {
     (async () => {
       try {
-        const s = await api<Summary>("/api/v1/prices/summary?symbol=RELIANCE&exchange=NSE");
+        // ✅ match your backend route
+        // if your backend expects exchange, try the second line instead
+        const s = await api<Summary>("/api/v1/prices/RELIANCE");
+        // const s = await api<Summary>("/api/v1/prices/RELIANCE?exchange=NSE");
+
         setSummary(s);
-        const h = await api<PricePoint[]>("/api/v1/prices/history?symbol=RELIANCE&exchange=NSE");
-        setSeries(h);
+
+        // Build a 4-point pseudo-history from summary fields
+        const n = (x: string | number | undefined) =>
+          typeof x === "string" ? parseFloat(x) : (x ?? 0);
+
+        const points: PricePoint[] = [
+          { label: "1y ago", value: n(s.price_1y_ago) },
+          { label: "30d ago", value: n(s.price_30d_ago) },
+          { label: "yesterday", value: n(s.yesterday_price) },
+          { label: "today", value: n(s.live_price) },
+        ];
+        setSeries(points);
       } catch (e: any) {
         setError(e?.message ?? "Failed to load");
       }
@@ -39,18 +54,20 @@ export default function Page() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <Stat label="Symbol" value={summary.symbol} />
           <Stat label="Exchange" value={summary.exchange} />
-          <Stat label="Live" value={summary.live_price} />
-          <Stat label="Prev Close" value={summary.yesterday_price} />
+          <Stat label="Live" value={String(summary.live_price)} />
+          <Stat label="Prev Close" value={String(summary.yesterday_price)} />
         </div>
       )}
       <div className="rounded-2xl border p-4">
-        <h2 className="mb-2 font-medium">Reliance — Close Price</h2>
+        <h2 className="mb-2 font-medium">
+          Reliance — Trend (1y → 30d → yesterday → today)
+        </h2>
         <LineChart width={900} height={320} data={series}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" minTickGap={32} />
+          <XAxis dataKey="label" />
           <YAxis />
           <Tooltip />
-          <Line type="monotone" dataKey="close" dot={false} />
+          <Line type="monotone" dataKey="value" dot={false} />
         </LineChart>
       </div>
     </main>

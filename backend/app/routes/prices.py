@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, status, BackgroundTasks
 from sqlalchemy.orm import Session
 from typing import List
-from app.database import get_db
-from app.models import PriceCache, Holding
-from app.models.schemas import PriceData, PriceUpdateRequest
-from app.services.stock_service import StockPriceService
+from ..database import get_db
+from ..models import PriceCache, Holding
+from ..models.schemas import PriceData, PriceUpdateRequest
+from ..services.stock_service import StockPriceService
 from datetime import datetime
 
 router = APIRouter(prefix="/prices", tags=["Prices"])

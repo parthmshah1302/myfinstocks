@@ -4,10 +4,10 @@ from sqlalchemy.orm import Session
 from sqlalchemy import text
 from typing import List
 from decimal import Decimal
-from app.database import get_db
-from app.models import Client
-from app.models.schemas import PortfolioSummary, PortfolioHolding
-from app.services.pdf_service import PDFService
+from ..database import get_db
+from ..models import Client
+from ..models.schemas import PortfolioSummary, PortfolioHolding
+from ..services.pdf_service import PDFService
 from datetime import datetime
 
 router = APIRouter(prefix="/portfolio", tags=["Portfolio"])

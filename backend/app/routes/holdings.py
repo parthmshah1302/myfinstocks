@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
-from app.database import get_db
-from app.models import Holding, Client
-from app.models.schemas import HoldingCreate, HoldingUpdate, HoldingResponse
+from ..database import get_db
+from ..models import Holding, Client
+from ..models.schemas import HoldingCreate, HoldingUpdate, HoldingResponse
 
 router = APIRouter(prefix="/holdings", tags=["Holdings"])
 
