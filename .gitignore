@@ -3,3 +3,4 @@ __pycache__
 sample/*.csv
 portfolio.db
 .env
+venv/
