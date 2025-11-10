@@ -89,3 +89,31 @@ def delete_holding(holding_id: int, db: Session = Depends(get_db)):
     db.delete(db_holding)
     db.commit()
     return None
+
+@router.get("/stocks/search")
+def search_stocks(query: str, db: Session = Depends(get_db)):
+    """Search for stocks in the database"""
+    
+    holdings = db.query(Holding).filter(
+        (Holding.symbol.ilike(f"%{query}%")) | 
+        (Holding.company_name.ilike(f"%{query}%"))
+    ).all()
+    
+    # Get unique stocks
+    unique_stocks = {}
+    for h in holdings:
+        if h.symbol not in unique_stocks:
+            unique_stocks[h.symbol] = {
+                "symbol": h.symbol,
+                "company_name": h.company_name,
+                "exchange": h.exchange,
+                "total_quantity": 0,
+                "num_clients": 0
+            }
+        unique_stocks[h.symbol]["total_quantity"] += h.quantity
+        unique_stocks[h.symbol]["num_clients"] += 1
+    
+    return {
+        "query": query,
+        "results": list(unique_stocks.values())
+    }

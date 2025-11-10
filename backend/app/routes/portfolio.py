@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 from typing import List
@@ -6,6 +7,7 @@ from decimal import Decimal
 from app.database import get_db
 from app.models import Client
 from app.models.schemas import PortfolioSummary, PortfolioHolding
+from app.services.pdf_service import PDFService
 from datetime import datetime
 
 router = APIRouter(prefix="/portfolio", tags=["Portfolio"])
@@ -89,14 +91,81 @@ def get_client_portfolio(client_id: int, db: Session = Depends(get_db)):
 
 @router.get("/export/{client_id}")
 def export_portfolio_pdf(client_id: int, db: Session = Depends(get_db)):
-    """Export portfolio as PDF (placeholder for now)"""
+    """Export portfolio as PDF"""
+    
+    # Get portfolio data
     portfolio = get_client_portfolio(client_id, db)
     
-    return {
-        "message": "PDF generation will be implemented in Phase 2",
-        "client_id": client_id,
-        "portfolio_summary": {
-            "total_value": str(portfolio.total_current_value),
-            "total_holdings": len(portfolio.holdings)
+    # Convert to dict for PDF generation
+    portfolio_dict = {
+        "client_name": portfolio.client_name,
+        "client_email": portfolio.client_email,
+        "total_current_value": float(portfolio.total_current_value),
+        "total_yesterday_value": float(portfolio.total_yesterday_value),
+        "total_day_change": float(portfolio.total_day_change),
+        "total_day_change_percent": float(portfolio.total_day_change_percent),
+        "holdings": [
+            {
+                "symbol": h.symbol,
+                "company_name": h.company_name,
+                "quantity": h.quantity,
+                "live_price": h.live_price,
+                "current_value": h.current_value,
+                "day_change": h.day_change,
+                "day_change_percent": h.day_change_percent,
+            }
+            for h in portfolio.holdings
+        ]
+    }
+    
+    # Generate PDF
+    pdf_buffer = PDFService.generate_portfolio_pdf(portfolio_dict)
+    
+    # Return as downloadable file
+    filename = f"portfolio_{portfolio.client_name.replace(' ', '_')}_{datetime.now().strftime('%Y%m%d')}.pdf"
+    
+    return StreamingResponse(
+        pdf_buffer,
+        media_type="application/pdf",
+        headers={
+            "Content-Disposition": f"attachment; filename={filename}"
         }
+    )
+
+@router.get("/dashboard")
+def get_dashboard_summary(db: Session = Depends(get_db)):
+    """Get overall dashboard with all clients and total values"""
+    
+    clients = db.query(Client).all()
+    
+    total_portfolio_value = Decimal("0.00")
+    total_day_change = Decimal("0.00")
+    client_summaries = []
+    
+    for client in clients:
+        portfolio = get_client_portfolio(client.id, db)
+        
+        client_summaries.append({
+            "client_id": client.id,
+            "client_name": client.name,
+            "portfolio_value": portfolio.total_current_value,
+            "day_change": portfolio.total_day_change,
+            "day_change_percent": portfolio.total_day_change_percent,
+            "num_holdings": len(portfolio.holdings)
+        })
+        
+        total_portfolio_value += portfolio.total_current_value
+        total_day_change += portfolio.total_day_change
+    
+    total_change_percent = Decimal("0.00")
+    if total_portfolio_value > 0:
+        total_change_percent = (total_day_change / (total_portfolio_value - total_day_change)) * 100
+    
+    return {
+        "total_clients": len(clients),
+        "total_portfolio_value": total_portfolio_value,
+        "total_day_change": total_day_change,
+        "total_day_change_percent": round(total_change_percent, 2),
+        "clients": client_summaries,
+        "last_updated": datetime.now()
     }
